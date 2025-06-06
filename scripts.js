@@ -16,7 +16,7 @@ function calc() {
     const result = document.getElementById('result');
 
     if (isNaN(num1) || isNaN(num2)) {
-        result.innerHTML = 'Пожалуйста, введите оба числа.';
+        result.innerHTML = 'Введите оба числа.';
     } else {
         result.innerHTML = 'Результат: ' + (num1 + num2);
     }
@@ -40,7 +40,7 @@ function sortArray() {
     const resultPara = document.getElementById('sortedResult');
 
     if (array.some(isNaN)) {
-        resultPara.innerHTML = 'Пожалуйста, введите корректные числа.';
+        resultPara.innerHTML = 'Введите корректные числа.';
         return;
     }
 
@@ -93,4 +93,8 @@ function register() {
     } else {
         message.innerHTML = 'Заполните все поля.';
     }
+}
+
+function changeTheme(theme) {
+    document.body.className = theme;
 }
