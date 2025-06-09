@@ -2,25 +2,30 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8" />
-    <title>Возможности JavaScript</title>
+    <title>Функционал JavaScript</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="styles2.css" />
+    <script src="scripts.js"></script>
 </head>
 <body>
     <h1>Возможности JavaScript</h1>
-<div class="menu">
-    <button onclick="showCalc()">Калькулятор</button>
-    <button onclick="showSorting()">Сортировка</button>
-    <button onclick="showAlert()">Уведомление Alert</button>
-    <button onclick="showGreeting()">Приветствие</button>
-    <button onclick="showRegistration()">Регистрация</button>
-    <button onclick="changeTheme('default')">Стандартная тема</button>
-    <button onclick="changeTheme('blue')">Синяя тема</button>
-</div>
+    <div class="menu">
+        <button onclick="showCalc()">Калькулятор</button>
+        <button onclick="showSorting()">Сортировка</button>
+        <button onclick="showAlert()">Уведомление Alert</button>
+        <button onclick="showGreeting()">Приветствие</button>
+        <button onclick="showRegistration()">Регистрация</button>
+        <button onclick="changeTheme('default')">Стандартная тема</button>
+        <button onclick="changeTheme('blue')">Синяя тема</button>
+        <button onclick="countClicks()">Считать нажатия</button>
+        <button onclick="changeTitle()">Изменить заголовок</button>
+        <button onclick="addListItem()">Добавить элемент в список</button>
+        <button id="toggleButton" onclick="toggleButtonText()">Нажми на кнопку</button>
+        <button id="addButton">Добавить элемент</button>
+    </div>
 
-<div id="content" class="content">
-</div>
-
-<script src="scripts.js"></script>
+    <div id="content" class="content">
+        <ul id="itemList"></ul>
+    </div>
 </body>
 </html>
