@@ -1,13 +1,3 @@
-let clickCount = 0;
-
-window.onload = function() {
-            console.log("Все теги прогрузились");
-        };
-
-window.addEventListener('load', function() {
-    console.log("Все ресурсы загружены");
-    });
-
 function showCalc() {
     const content = document.getElementById('content');
     content.innerHTML = `
@@ -151,3 +141,13 @@ document.getElementById('itemList').addEventListener('click', function(event) {
                 console.log(event.target.innerText);
     }
 });
+
+let clickCount = 0;
+
+window.onload = function() {
+            console.log("Все теги прогрузились");
+        };
+
+window.addEventListener('load', function() {
+    console.log("Все ресурсы загружены");
+    });
