@@ -162,3 +162,54 @@ window.onload = function() {
         });
     }
 };
+
+function showRandomColor() {
+    const content = document.getElementById('content');
+    const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+    content.innerHTML = `
+        <h2>Случайный цвет фона</h2>
+        <p>Сгенерированный цвет: ${randomColor}</p>
+        <div style="width: 100px; height: 100px; background-color: ${randomColor}; border: 1px solid black;"></div>
+    `;
+    document.body.style.backgroundColor = randomColor;
+}
+
+function showImageSlider() {
+    const content = document.getElementById('content');
+    const images = [
+        '1.webp',
+        '2.jpg',
+        '3.jpg'
+    ];
+    let currentImageIndex = 0;
+
+    function updateImage() {
+        const imageElement = document.getElementById('sliderImage');
+        if (imageElement) {
+            imageElement.src = images[currentImageIndex];
+        }
+    }
+
+    content.innerHTML = `
+        <h2>Слайдер изображений</h2>
+        <img id="sliderImage" src="${images[0]}" alt="Слайд" style="width: 300px; height: auto;">
+        <br>
+        <button onclick="prevImage()">Предыдущее</button>
+        <button onclick="nextImage()">Следующее</button>
+    `;
+
+    window.prevImage = function() {
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+        updateImage();
+    };
+
+    window.nextImage = function() {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        updateImage();
+    };
+
+    images.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+}
