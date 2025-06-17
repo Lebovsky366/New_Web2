@@ -1,4 +1,5 @@
 let clickCount = 0;
+let hoverCount = 0;
 
 function showCalc() {
     const content = document.getElementById('content');
@@ -103,7 +104,7 @@ function changeTheme(theme) {
 
 function countClicks() {
     clickCount++;
-    console.log(`Кнопка нажата ${clickCount} раз`);
+    document.getElementById('click-counter-display').textContent = `Нажатий на кнопку: ${clickCount}`;
 }
 
 function changeTitle() {
@@ -143,22 +144,25 @@ document.getElementById('itemList')?.addEventListener('click', function(event) {
     }
 });
 
+// Отображение счетчиков при загрузке страницы
 window.addEventListener('load', function() {
     console.log("Все ресурсы загружены");
+    //  Инициализация счетчиков
+    document.getElementById('click-counter-display').textContent = `Нажатий на кнопку: ${clickCount}`;
+    document.getElementById('hover-counter-display').textContent = `Наведений на кнопку: ${hoverCount}`;
 });
 
 window.onload = function() {
     console.log("Все теги прогрузились");
 };
 
-let hoverCount = 0;
 
 window.onload = function() {
     const hoverCounterButton = document.getElementById('hoverCounterBtn');
     if (hoverCounterButton) {
         hoverCounterButton.addEventListener('mouseover', () => {
             hoverCount++;
-            console.log(`Кнопка наведена ${hoverCount} раз(а)`);
+            document.getElementById('hover-counter-display').textContent = `Наведений на кнопку: ${hoverCount}`;
         });
     }
 };
