@@ -1,3 +1,5 @@
+let clickCount = 0;
+
 function showCalc() {
     const content = document.getElementById('content');
     content.innerHTML = `
@@ -100,54 +102,63 @@ function changeTheme(theme) {
 }
 
 function countClicks() {
-            clickCount++;
-            console.log(`Кнопка нажата ${clickCount} раз`);
+    clickCount++;
+    console.log(`Кнопка нажата ${clickCount} раз`);
 }
 
 function changeTitle() {
-            document.querySelector('h1').innerText = "Функционал JavaScript";
+    document.querySelector('h1').innerText = "Функционал JavaScript";
 }
 
 function addListItem() {
-            const itemList = document.getElementById('itemList');
-            const newItem = document.createElement('li');
-            newItem.innerText = `Элемент ${itemList.children.length + 1}`;
-            itemList.appendChild(newItem);
-            if (itemList.children.length % 2 === 0) {
-                newItem.style.backgroundColor = '#f0f8ff';
+    const itemList = document.getElementById('itemList');
+    const newItem = document.createElement('li');
+    newItem.innerText = `Элемент ${itemList.children.length + 1}`;
+    itemList.appendChild(newItem);
+    if (itemList.children.length % 2 === 0) {
+        newItem.style.backgroundColor = '#f0f8ff';
     }
 }
 
 function toggleButtonText() {
-            const button = document.getElementById('toggleButton');
-            button.innerText = button.innerText === "Нажми на кнопку" ? "Кнопка нажата" : "Нажми на кнопку";
+    const button = document.getElementById('toggleButton');
+    button.innerText = button.innerText === "Нажми на кнопку" ? "Кнопка нажата" : "Нажми на кнопку";
 }
 
 document.addEventListener('click', function(event) {
     const target = event.target;
-    const tagName = target.tagName.toLowerCase();
     const hasSuperElementClass = target.classList.contains('super_element');
-    console.log(`Класс "super_element" ${hasSuperElementClass ? 'присутствует' : 'отсутствует'} в элементе "${tagName}".`);
+    console.log(`Класс "super_element" ${hasSuperElementClass ? 'присутствует' : 'отсутствует'} в элементе "${target.tagName.toLowerCase()}".`);
 });
 
 document.addEventListener('mouseover', function(event) {
-        if (event.target.tagName.toLowerCase() === 'textarea') {
-                console.log("Вы навели на textarea.");
+    if (event.target.tagName.toLowerCase() === 'textarea') {
+        console.log("Вы навели на textarea.");
     }
 });
 
-document.getElementById('itemList').addEventListener('click', function(event) {
-        if (event.target.tagName.toLowerCase() === 'button') {
-                console.log(event.target.innerText);
+document.getElementById('itemList')?.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() === 'button') {
+        console.log(event.target.innerText);
     }
 });
-
-let clickCount = 0;
-
-window.onload = function() {
-            console.log("Все теги прогрузились");
-        };
 
 window.addEventListener('load', function() {
     console.log("Все ресурсы загружены");
-    });
+});
+
+window.onload = function() {
+    console.log("Все теги прогрузились");
+};
+
+let hoverCount = 0;
+
+window.onload = function() {
+    const hoverCounterButton = document.getElementById('hoverCounterBtn');
+    if (hoverCounterButton) {
+        hoverCounterButton.addEventListener('mouseover', () => {
+            hoverCount++;
+            console.log(`Кнопка наведена ${hoverCount} раз(а)`);
+        });
+    }
+};
