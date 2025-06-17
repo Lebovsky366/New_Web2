@@ -21,12 +21,26 @@
         <button onclick="changeTitle()">Изменить заголовок</button>
         <button onclick="addListItem()">Добавить элемент в список</button>
         <button id="toggleButton" onclick="toggleButtonText()">Нажми на кнопку</button>
-        <button id="addButton">Добавить элемент</button>
         <button id="hoverCounterBtn">Наведи на меня</button>
         <button onclick="showRandomColor()">Случайный цвет фона</button>
         <button onclick="showImageSlider()">Слайдер изображений</button>
     </div>
-
+    <button id="addButton">Добавить элемент</button>
+    <script>
+    document.getElementById('addButton').addEventListener('click', () => {
+        const square = document.createElement('div');
+        Object.assign(square.style, {
+            position: 'fixed',
+            width: '50px',
+            height: '50px',
+            backgroundColor: 'green',
+            zIndex: 9999,
+            top: Math.random() * (window.innerHeight - 50) + 'px',
+            left: Math.random() * (window.innerWidth - 50) + 'px'
+        });
+        document.body.appendChild(square);
+    });
+    </script>
     <div id="content" class="content">
         <ul id="itemList"></ul>
     </div>
