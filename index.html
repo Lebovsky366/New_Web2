@@ -1,54 +1,56 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <title>Функционал JavaScript</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="styles2.css" />
-    <script src="scripts.js"></script>
+<meta charset="UTF-8" />
+<title>Работа с JSON</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 200px;
+  }
+  h3 {
+    font-size: 1.2em;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
 </head>
 <body>
-    <h1>Возможности JavaScript</h1>
-    <div class="menu">
-        <button onclick="showCalc()">Калькулятор</button>
-        <button onclick="showSorting()">Сортировка</button>
-        <button onclick="showAlert()">Уведомление Alert</button>
-        <button onclick="showGreeting()">Приветствие</button>
-        <button onclick="showRegistration()">Регистрация</button>
-        <button onclick="changeTheme('default')">Стандартная тема</button>
-        <button onclick="changeTheme('blue')">Синяя тема</button>
-        <button onclick="countClicks()">Считать нажатия</button>
-        <button onclick="changeTitle()">Изменить заголовок</button>
-        <button onclick="addListItem()">Добавить элемент в список</button>
-        <button id="toggleButton" onclick="toggleButtonText()">Нажми на кнопку</button>
-        <button id="hoverCounterBtn">Наведи на меня</button>
-        <button onclick="showRandomColor()">Случайный цвет фона</button>
-        <button onclick="showImageSlider()">Слайдер изображений</button>
-    </div>
-    <button id="addButton">Добавить элемент</button>
-    <script>
-    document.getElementById('addButton').addEventListener('click', () => {
-        const square = document.createElement('div');
-        Object.assign(square.style, {
-            position: 'fixed',
-            width: '50px',
-            height: '50px',
-            backgroundColor: 'green',
-            zIndex: 9999,
-            top: Math.random() * (window.innerHeight - 50) + 'px',
-            left: Math.random() * (window.innerWidth - 50) + 'px'
-        });
-        document.body.appendChild(square);
-    });
-    </script>
-    <div id="content" class="content">
-        <ul id="itemList"></ul>
-    </div>
 
-    <div id="counters-window" class="counters-window">
-        <h2>Счетчики</h2>
-        <div id="click-counter-display">Нажатий на кнопку: 0</div>
-        <div id="hover-counter-display">Наведений на кнопку: 0</div>
-    </div>
+<div class="content"></div>
+
+<script src="data.js"></script>
+<script>
+  const data = dataInfo;
+  const contentDiv = document.querySelector('.content');
+
+  data.forEach(item => {
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'item';
+
+    const title = document.createElement('h3');
+    title.textContent = item.title;
+
+    const img = document.createElement('img');
+    img.src = item.url;
+    img.alt = item.description;
+
+    itemDiv.appendChild(title);
+    itemDiv.appendChild(img);
+    contentDiv.appendChild(itemDiv);
+  });
+</script>
 </body>
 </html>
