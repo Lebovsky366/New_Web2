@@ -1,0 +1,114 @@
+head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Расписание занятий</title>
+<!--Bootstrap-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container my-4">
+
+<h1 class="mb-4">Расписание занятий</h1>
+
+<!-- Контейнер для занятий -->
+<div id="scheduleContainer"></div>
+
+<script>
+// Исходные данные о занятиях
+const scheduleData = [
+  {
+    name: 'Йога',
+    time: '08:00 - 09:00',
+    maxParticipants: 10,
+    currentParticipants: 5
+  },
+  {
+    name: 'Бокс',
+    time: '10:00 - 11:00',
+    maxParticipants: 8,
+    currentParticipants: 8
+  },
+  {
+    name: 'Пилатес',
+    time: '12:00 - 13:00',
+    maxParticipants: 12,
+    currentParticipants: 3
+  }
+];
+
+// localStorage
+let schedule = JSON.parse(localStorage.getItem('schedule')) || scheduleData;
+
+function renderSchedule() {
+  const container = document.getElementById('scheduleContainer');
+  container.innerHTML = '';
+
+  schedule.forEach((session, index) => {
+    const card = document.createElement('div');
+    card.className = 'card mb-3';
+
+    const cardBody = document.createElement('div');
+    cardBody.className = 'card-body';
+
+    const title = document.createElement('h2');
+    title.className = 'card-title';
+    title.textContent = session.name;
+
+    const timeInfo = document.createElement('p');
+    timeInfo.className = 'card-text';
+    timeInfo.innerHTML = `<strong>Время:</strong> ${session.time}`;
+
+    const participantsInfo = document.createElement('p');
+    participantsInfo.className = 'card-text';
+    participantsInfo.innerHTML = `<strong>Участников:</strong> ${session.currentParticipants}/${session.maxParticipants}`;
+
+    const btnGroup = document.createElement('div');
+
+    const registerBtn = document.createElement('button');
+    registerBtn.className = 'btn btn-primary me-2';
+    registerBtn.textContent = 'Записаться';
+
+    const cancelBtn = document.createElement('button');
+    cancelBtn.className = 'btn btn-secondary';
+    cancelBtn.textContent = 'Отменить запись';
+
+    if (session.currentParticipants >= session.maxParticipants) {
+      registerBtn.disabled = true;
+    }
+
+    registerBtn.onclick = () => {
+      if (session.currentParticipants < session.maxParticipants) {
+        session.currentParticipants++;
+        saveAndRender();
+      }
+    };
+
+    cancelBtn.onclick = () => {
+      if (session.currentParticipants > 0) {
+        session.currentParticipants--;
+        saveAndRender();
+      }
+    };
+
+    btnGroup.appendChild(registerBtn);
+    btnGroup.appendChild(cancelBtn);
+
+    cardBody.appendChild(title);
+    cardBody.appendChild(timeInfo);
+    cardBody.appendChild(participantsInfo);
+    cardBody.appendChild(btnGroup);
+    card.appendChild(cardBody);
+    container.appendChild(card);
+  });
+}
+
+// Функция для сохранения данных и перерисовки
+function saveAndRender() {
+  localStorage.setItem('schedule', JSON.stringify(schedule));
+  renderSchedule();
+}
+
+// Изначально отображаем расписание
+renderSchedule();
+</script>
+</body>
+</html>
