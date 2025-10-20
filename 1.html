@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<title>Задание 1</title>
+<script>
+
+// 1. Функция для вывода размеров окна при изменении
+window.addEventListener('resize', function() {
+    alert('Ширина: ' + window.innerWidth + ', Высота: ' + window.innerHeight);
+});
+
+// 2. Подтверждение закрытия страницы
+window.addEventListener('beforeunload', function(e) {
+    e.preventDefault();
+    e.returnValue = 'Вы уверены, что хотите закрыть страницу?';
+});
+
+// 3. Управление историей
+function goBack() {
+    history.back();
+}
+function goForward() {
+    history.forward();
+}
+</script>
+</head>
+<body>
+
+<h2>Управление историей</h2>
+<button onclick="goBack()">Назад</button>
+<button onclick="goForward()">Вперед</button>
+
+</body>
+</html>

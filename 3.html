@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Список статей</title>
+<!--Bootstrap-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container my-4">
+
+<h1 class="mb-4">Список статей</h1>
+
+<!-- Кнопки управления -->
+<div class="mb-4">
+  <button id="addArticle" class="btn btn-primary me-2">Добавить статью</button>
+</div>
+
+<!-- Контейнер для статей -->
+<div id="articlesContainer"></div>
+
+<script>
+// Начальные данные
+const articlesData = [
+  {
+    title:'Заголовок статья 1',
+    content:'Содержание статьи 1'
+  },
+  {
+    title:'Заголовок статья 2',
+    content:'Содержание статьи 2'
+  }
+];
+
+// localStorage
+let articles = JSON.parse(localStorage.getItem('articles')) || articlesData;
+
+// Функция для отображения статей
+function renderArticles() {
+  const container = document.getElementById('articlesContainer');
+  container.innerHTML = ''; // очистка
+
+  articles.forEach((article, index) => {
+    const card = document.createElement('div');
+    card.className = 'card mb-3';
+
+    const cardBody = document.createElement('div');
+    cardBody.className = 'card-body';
+
+    const title = document.createElement('h2');
+    title.className = 'card-title';
+    title.textContent = article.title;
+
+    const content = document.createElement('p');
+    content.className = 'card-text';
+    content.textContent = article.content;
+
+    const btnGroup = document.createElement('div');
+    btnGroup.className = 'mt-3';
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'btn btn-danger me-2';
+    deleteBtn.textContent = 'Удалить';
+    deleteBtn.onclick = () => {
+      articles.splice(index, 1);
+      saveAndRender();
+    };
+
+    const editBtn = document.createElement('button');
+    editBtn.className = 'btn btn-secondary';
+    editBtn.textContent = 'Редактировать';
+    editBtn.onclick = () => {
+      const newTitle = prompt('Введите новый заголовок:', article.title);
+      const newContent = prompt('Введите новый текст:', article.content);
+      if (newTitle !== null && newContent !== null) {
+        articles[index] = { title: newTitle, content: newContent };
+        saveAndRender();
+      }
+    };
+
+    btnGroup.appendChild(deleteBtn);
+    btnGroup.appendChild(editBtn);
+
+    cardBody.appendChild(title);
+    cardBody.appendChild(content);
+    cardBody.appendChild(btnGroup);
+    card.appendChild(cardBody);
+    container.appendChild(card);
+  });
+}
+
+// Функция для сохранения и перерисовки
+function saveAndRender() {
+  localStorage.setItem('articles', JSON.stringify(articles));
+  renderArticles();
+}
+
+// Обработчик кнопки "Добавить статью"
+document.getElementById('addArticle').addEventListener('click', () => {
+  const newArticle = {
+    title: 'Новая статья',
+    content: 'Введите содержание статьи...'
+  };
+  articles.push(newArticle);
+  saveAndRender();
+});
+
+// Изначально отображаем статьи
+renderArticles();
+</script>
+
+</body>
+</html>
